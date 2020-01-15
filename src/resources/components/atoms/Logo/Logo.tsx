@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface Props {}
+interface Props {
+    className?: string
+}
 
 interface State {}
 
 const Logo = (props: Props, state: State) => {
+    const { className } = props;
+
     return(
-        <LogoTitle>FreeNote</LogoTitle>
+        <LogoTitle className={className}>FreeNote</LogoTitle>
     )
 }
 
