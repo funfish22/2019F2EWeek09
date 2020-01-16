@@ -22,8 +22,8 @@ export default Search;
 
 const SearchRoot = styled.div`
     display: inline-flex;
-    max-width: 290px;
-    width: 100%;
+    width: 290px;
+    max-width: 100%;
     align-items: center;
     border-radius: 8px;
     background-color: #E6E6E6;
