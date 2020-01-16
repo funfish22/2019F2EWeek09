@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import Router from './Router';
 import Menu from './Menu';
-import NoteList from 'pages/default/NoteList';
 
 interface Props { }
 
@@ -15,7 +14,6 @@ const App = (props: Props, state: State) => {
         <HashRouter>
             <Container>
                 <Menu/>
-                <NoteList/>
                 <Router/>
             </Container>
         </HashRouter>
