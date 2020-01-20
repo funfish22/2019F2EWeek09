@@ -1,24 +1,73 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface Props {}
+import ReactHtmlParser from 'react-html-parser';
+
+const source = [
+    {
+        "title": "first",
+        "content": "<span>內容</span>",
+        "time": "2019/9/5",
+        "tags": [
+            {
+            "tagTitle": "健康",
+            "id": 1
+            }
+        ],
+        "files": false,
+        "id": 1
+    }
+]
+
+interface Props {
+    Note: Array<{
+        id: number,
+        title: string,
+        time: string,
+        tags: Array<{
+            id: number,
+            tagTitle: string
+        }>,
+        files: boolean
+    }>
+}
 
 interface State {}
 
 const NoteCard = (props: Props, state: State) => {
     return(
-        <NoteCardRoot>
-            <NoteTitleBG/>
-            <NoteTitle>無標題</NoteTitle>
-            <NoteGutter/>
-            <NoteText></NoteText>
-            <NoteFooter>
-                <NoteTag>健康</NoteTag>
-                <NoteIcon className="icon-attachment"/>
-                <NoteTime>2019/9/5</NoteTime>
-            </NoteFooter>
-        </NoteCardRoot>
+        <>
+            {
+                props.Note && props.Note.map((row: any) => (
+                    <NoteCardRoot key={row.id}>
+                        <NoteTitleBG/>
+                        <NoteTitle>{row.title}</NoteTitle>
+                        <NoteGutter/>
+                        <NoteText>{ReactHtmlParser(row.content)}</NoteText>
+                        <NoteFooter>
+                            <NoteTagRoot>
+                                {
+                                    row.tags && row.tags.map((row: any) => (
+                                        <NoteTag key={row.id}>{row.tagTitle}</NoteTag>
+                                    ))
+                                }
+                            </NoteTagRoot>
+                            {
+                                row.files && (
+                                    <NoteIcon className="icon-attachment"/>
+                                )
+                            }
+                            <NoteTime>{row.time}</NoteTime>
+                        </NoteFooter>
+                    </NoteCardRoot>
+                ))
+            }
+        </>
     )
+}
+
+NoteCard.defaultProps = {
+    Note: source
 }
 
 export default NoteCard;
@@ -87,6 +136,10 @@ const NoteCardRoot = styled.div`
         right: -9px;
         z-index: 1;
     }
+
+    &:not(:first-of-type) {
+        margin-top: 15px;
+    }
 `;
 
 const NoteTitle = styled.h2`
@@ -124,12 +177,20 @@ const NoteFooter = styled.div`
     z-index: 1;
 `;
 
-const NoteTag = styled.div`
+const NoteTagRoot = styled.ul`
+    display: flex;
+`;
+
+const NoteTag = styled.li`
     color: #2F419B;
     padding: 3px 16px;
     font-size: 14px;
     background-color: #E9EBF4;
     border-radius: 4px;
+
+    &:not(:first-of-type){
+        margin-left: 5px;
+    }
 `;
 
 const NoteIcon = styled.span`

@@ -4,14 +4,18 @@ import styled from 'styled-components';
 import NoteList from 'pages/default/NoteList';
 import Editor from 'resources/components/atoms/Editor';
 
-interface Props { }
+interface Props { 
+    Note: any
+}
 
 interface State { }
 
 const Home = (props: Props, state: State) => {
+    const { Note } = props;
+
     return(
         <>
-            <NoteList/>
+            <NoteList Note={Note}/>
             <EditorRoot>
                 <EditorTitle type="text" placeholder="無標題"/>
                 <Editor/>

@@ -4,16 +4,20 @@ import styled from 'styled-components';
 import Search from 'resources/components/atoms/Search';
 import NoteCard from 'resources/components/atoms/NoteCard';
 
-interface Props {}
+interface Props {
+    Note: any
+}
 
 interface State {}
 
 const NoteList = (props: Props, state: State) => {
+    const { Note } = props;
+
     return(
         <NoteListRoot>
             <Search/>
             <Gutter/>
-            <NoteCard/>
+            <NoteCard Note={Note}/>
         </NoteListRoot>
     )
 }
