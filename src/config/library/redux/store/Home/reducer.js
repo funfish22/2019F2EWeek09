@@ -7,6 +7,11 @@ const initState = {
 
 const Home = (state = initState, action) => {
     switch(action.type){
+        case Types.GET_NOTE_SUCCESS :
+            return {
+                ...state,
+                note: action.payload.notes
+            }
 
         default:
             return state;
