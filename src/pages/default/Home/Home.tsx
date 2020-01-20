@@ -5,13 +5,16 @@ import NoteList from 'pages/default/NoteList';
 import Editor from 'resources/components/atoms/Editor';
 
 interface Props { 
-    Note: any
+    Note: any,
+    getNoteRequest: Function
 }
 
 interface State { }
 
 const Home = (props: Props, state: State) => {
     const { Note } = props;
+
+    props.getNoteRequest()
 
     return(
         <>
