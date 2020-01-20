@@ -1,16 +1,8 @@
 import App from './App';
 import { connect } from 'react-redux';
 
-import { getNoteRequest } from 'config/library/redux/store/Home/action';
-
 const mapStateToProps = () => {}
 
-const mapDispatchToProps = (dispatch: any) => {
-    return{
-        getNoteRequest: () => {
-            dispatch(getNoteRequest())
-        }
-    }
-}
+const mapDispatchToProps = () => {}
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(null)(App);

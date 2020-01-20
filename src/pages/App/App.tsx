@@ -5,15 +5,11 @@ import styled from 'styled-components';
 import Router from './Router';
 import Menu from './Menu';
 
-interface Props { 
-    getNoteRequest: Function
-}
+interface Props { }
 
 interface State { }
 
 const App = (props: Props, state: State) => {
-
-    props.getNoteRequest()
 
     return(
         <HashRouter>

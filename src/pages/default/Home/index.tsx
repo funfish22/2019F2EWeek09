@@ -1,6 +1,8 @@
 import Home from './Home';
 import { connect } from 'react-redux';
 
+import { getNoteRequest } from 'config/library/redux/store/Home/action';
+
 const mapStateToProps = (state: 
     { 
         Home: { note: any; }; 
@@ -10,4 +12,8 @@ const mapStateToProps = (state:
     }
 }
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = () => {}
+
+export default connect(mapStateToProps, {
+    getNoteRequest
+})(Home);
