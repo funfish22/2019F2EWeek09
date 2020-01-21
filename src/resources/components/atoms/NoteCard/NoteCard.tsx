@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import ReactHtmlParser from 'react-html-parser';
 
 const source = [
@@ -32,13 +31,15 @@ interface Props {
     }>
 }
 
-interface State {}
+interface State { }
 
 const NoteCard = (props: Props, state: State) => {
+    const { Note } = props;
+
     return(
         <>
             {
-                props.Note && props.Note.map((row: any) => (
+                Note && Note.sort((a: any, b: any) => a.id > b.id ? -1 : 1).map((row: any) => (
                     <NoteCardRoot key={row.id}>
                         <NoteTitleBG/>
                         <NoteTitle>{row.title}</NoteTitle>
@@ -111,7 +112,6 @@ const NoteTitleBG = styled.div`
 const NoteCardRoot = styled.div`
     width: 290px;
     max-width: 100%;
-    box-shadow: 0px 0px 6px rgba(#A3A3A3, 0.5);
     padding: 35px 23px 23px 23px;
     background: linear-gradient(to left bottom,transparent 50%,#e9ebf4 0) no-repeat 100% 0/32px 32px,linear-gradient(-135deg,transparent 23px,#fff 0);
     border-radius: 4px;

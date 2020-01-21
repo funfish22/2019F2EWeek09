@@ -1,17 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 import Search from 'resources/components/atoms/Search';
 import NoteCard from 'resources/components/atoms/NoteCard';
 
-interface Props {
-    Note: any
+interface Props {}
+
+interface State {
+    Home: { note: Array<{
+        id: number,
+        title: string,
+        time: string,
+        tags: Array<{
+            id: number,
+            tagTitle: string
+        }>,
+        files: boolean
+    }>}
 }
 
-interface State {}
-
 const NoteList = (props: Props, state: State) => {
-    const { Note } = props;
+    const Note = useSelector((state: State) => state.Home.note);
 
     return(
         <NoteListRoot>

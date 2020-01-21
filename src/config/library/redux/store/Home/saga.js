@@ -17,8 +17,21 @@ function* watchGetNoteRequest() {
     yield takeEvery(actions.Types.GET_NOTE_REQUEST, getNote)
 }
 
+function* createNote(action, payload) {
+    try{
+        yield call(api.createNote, {title: action.payload.title, time: action.payload.time, id: action.payload.id});
+    }catch (e) {
+        
+    }
+}
+
+function* watchCreateNoteSuccess() {
+    yield takeLatest(actions.Types.CREATE_NOTE_SUCCESS, createNote)
+}
+
 const HomeSagas = [
-    fork(watchGetNoteRequest)
+    fork(watchGetNoteRequest),
+    fork(watchCreateNoteSuccess)
 ];
 
 export default HomeSagas;

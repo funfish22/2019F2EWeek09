@@ -13,6 +13,19 @@ const Home = (state = initState, action) => {
                 note: action.payload.notes
             }
 
+        case Types.CREATE_NOTE_REQUEST:
+            return {
+                ...state,
+                note: [...state.note, {
+                    title: action.payload.title,
+                    content: '',
+                    time: action.payload.time,
+                    tags: [],
+                    files: false,
+                    id: action.payload.id
+                }]
+            }
+
         default:
             return state;
     }

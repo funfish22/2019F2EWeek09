@@ -2,16 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface Props {
-    className?: string;
+    className?: any,
+    onClick: any
 }
 
 interface State {}
 
-const AddNoteButton = (props: Props, state: State) => {
-    const { className } = props;
+const AddNoteButton: React.FunctionComponent<Props> = (props: Props, state: State) => {
+    const { className, onClick } = props;
 
     return(
-        <AddNoteButtonRoot className={className}>
+        <AddNoteButtonRoot className={className} onClick={onClick}>
             <AddIcon></AddIcon>
             <AddNoteText>新增筆記</AddNoteText>
         </AddNoteButtonRoot>

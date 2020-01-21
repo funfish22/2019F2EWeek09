@@ -1,24 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
+import {useDispatch} from 'react-redux';
+import { getNoteRequest } from 'config/library/redux/store/Home/action';
 
 import NoteList from 'pages/default/NoteList';
 import Editor from 'resources/components/atoms/Editor';
 
-interface Props { 
-    Note: any,
-    getNoteRequest: Function
-}
+interface Props {}
 
-interface State { }
+interface State {}
 
 const Home = (props: Props, state: State) => {
-    const { Note } = props;
+    const dispatch = useDispatch();
 
-    props.getNoteRequest()
-
+    dispatch(getNoteRequest())
+    
     return(
         <>
-            <NoteList Note={Note}/>
+            <NoteList/>
             <EditorRoot>
                 <EditorTitle type="text" placeholder="無標題"/>
                 <Editor/>

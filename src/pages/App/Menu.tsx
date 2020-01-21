@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import {useDispatch} from 'react-redux';
+import { createNoteRequest, createNoteSuccess } from 'config/library/redux/store/Home/action';
 
 import Logo from 'resources/components/atoms/Logo';
 import AddNoteButton from 'resources/components/atoms/AddNoteButton';
@@ -9,10 +11,22 @@ interface Props { }
 interface State { }
 
 const Menu = (props: Props, state: State) => {
+    const dispatch = useDispatch();
+
+    const create = () => {
+        const Today = new Date();
+        const title = '無標題';
+        const time = `${Today.getFullYear()}/${Today.getMonth() + 1}/${Today.getDate()}`;
+        const id = Today.getTime();
+
+        dispatch(createNoteRequest({title, time, id}));
+        dispatch(createNoteSuccess({title, time, id}));
+    }
+    
     return(
         <MenuRoot>
             <LogoRoot/>
-            <AddNoteButtonRoot/>
+            <AddNoteButtonRoot onClick={create}/>
         </MenuRoot>
     )
 }
