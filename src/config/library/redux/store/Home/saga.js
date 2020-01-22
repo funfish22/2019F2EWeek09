@@ -20,8 +20,20 @@ function* watchGetNoteRequest() {
 function* createNote(action, payload) {
     try{
         yield call(api.createNote, {title: action.payload.title, time: action.payload.time, id: action.payload.id});
+        yield getCreateCard(action.payload.id)
     }catch (e) {
         
+    }
+}
+
+function* getCreateCard(action, payload) {
+    try{
+        const result = yield call(api.getCreateCard, (action))
+        yield put(actions.getTargetCardSuccess({
+            note: result.data
+        }))
+    }catch (e) {
+
     }
 }
 

@@ -1,7 +1,9 @@
 import { Types } from './action'
 
 const initState = {
-    searchStar: false
+    searchStar: false,
+    targetCard: {},
+    targetCardId: ''
 }
 
 
@@ -13,7 +15,7 @@ const Home = (state = initState, action) => {
                 note: action.payload.notes
             }
 
-        case Types.CREATE_NOTE_REQUEST:
+        case Types.CREATE_NOTE_REQUEST :
             return {
                 ...state,
                 note: [...state.note, {
@@ -24,6 +26,21 @@ const Home = (state = initState, action) => {
                     files: false,
                     id: action.payload.id
                 }]
+            }
+
+        case Types.GET_TARGET_CARD :
+            const targetCard = state.note.find((row) => row.id === action.payload.id)
+
+            return {
+                ...state,
+                targetCardId: action.payload.id,
+                targetCard: targetCard
+            }
+
+        case Types.GET_TARGET_CARD_SUCCESS :
+            return {
+                ...state,
+                targetCard: action.payload.note,
             }
 
         default:

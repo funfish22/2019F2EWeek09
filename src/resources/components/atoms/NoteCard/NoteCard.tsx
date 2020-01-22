@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import ReactHtmlParser from 'react-html-parser';
 
 const source = [
@@ -28,40 +28,50 @@ interface Props {
             tagTitle: string
         }>,
         files: boolean
-    }>
+    }>,
+    NoteId: number,
+    onClick: any
 }
 
 interface State { }
 
+interface MyStyle {
+    isCurrent: boolean
+}
+
 const NoteCard = (props: Props, state: State) => {
-    const { Note } = props;
+    const { Note, NoteId, onClick } = props;
 
     return(
         <>
             {
-                Note && Note.sort((a: any, b: any) => a.id > b.id ? -1 : 1).map((row: any) => (
-                    <NoteCardRoot key={row.id}>
-                        <NoteTitleBG/>
-                        <NoteTitle>{row.title}</NoteTitle>
-                        <NoteGutter/>
-                        <NoteText>{ReactHtmlParser(row.content)}</NoteText>
-                        <NoteFooter>
-                            <NoteTagRoot>
+                Note && Note.sort((a: any, b: any) => a.id > b.id ? -1 : 1).map((row: any) => {
+                    const isCurrent = NoteId === row.id
+
+                    return(
+                        <NoteCardRoot key={row.id} onClick={() => onClick(row.id)}>
+                            <NoteTitleBG isCurrent={isCurrent}/>
+                            <NoteTitle>{row.title}</NoteTitle>
+                            <NoteGutter/>
+                            <NoteText>{ReactHtmlParser(row.content)}</NoteText>
+                            <NoteFooter>
+                                <NoteTagRoot>
+                                    {
+                                        row.tags && row.tags.map((row: any) => (
+                                            <NoteTag key={row.id}>{row.tagTitle}</NoteTag>
+                                        ))
+                                    }
+                                </NoteTagRoot>
                                 {
-                                    row.tags && row.tags.map((row: any) => (
-                                        <NoteTag key={row.id}>{row.tagTitle}</NoteTag>
-                                    ))
+                                    row.files && (
+                                        <NoteIcon className="icon-attachment"/>
+                                    )
                                 }
-                            </NoteTagRoot>
-                            {
-                                row.files && (
-                                    <NoteIcon className="icon-attachment"/>
-                                )
-                            }
-                            <NoteTime>{row.time}</NoteTime>
-                        </NoteFooter>
-                    </NoteCardRoot>
-                ))
+                                <NoteTime>{row.time}</NoteTime>
+                            </NoteFooter>
+                        </NoteCardRoot>
+                    )
+                })
             }
         </>
     )
@@ -81,7 +91,7 @@ const NoteTitleBG = styled.div`
     height: 100%;
     top: 0;
     left: 0;
-    opacity: 0;
+    opacity: ${(props: MyStyle) => !props.isCurrent ? '0' : '1'};
     transition: .2s;
 
     &:after{
@@ -140,6 +150,8 @@ const NoteCardRoot = styled.div`
     &:not(:first-of-type) {
         margin-top: 15px;
     }
+
+    
 `;
 
 const NoteTitle = styled.h2`

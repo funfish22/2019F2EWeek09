@@ -3,7 +3,10 @@ export const Types = {
     GET_NOTE_SUCCESS: 'home/get_note_success',
 
     CREATE_NOTE_REQUEST: 'home/create_note_request',
-    CREATE_NOTE_SUCCESS: 'home/create_note_success'
+    CREATE_NOTE_SUCCESS: 'home/create_note_success',
+
+    GET_TARGET_CARD: 'home/get_target_card',
+    GET_TARGET_CARD_SUCCESS: 'home/get_target_card_success'
 }
 
 export const getNoteRequest = () => ({
@@ -38,3 +41,17 @@ export const createNoteSuccess = ({title, time, id}) => {
         }
     }
 }
+
+export const getTargetCard = id => ({
+    type: Types.GET_TARGET_CARD,
+    payload: {
+        id
+    }
+})
+
+export const getTargetCardSuccess = ({note}) => ({
+    type: Types.GET_TARGET_CARD_SUCCESS,
+    payload: {
+        note
+    }
+})
