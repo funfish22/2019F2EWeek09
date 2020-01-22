@@ -14,3 +14,7 @@ export const createNote = ({title, time, id}) => {
         id
     })
 };
+
+export const getCreateCard = id => {
+    return axios.get(`/note/${id}`)
+}
