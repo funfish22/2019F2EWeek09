@@ -2,7 +2,9 @@ import { Types } from './action'
 
 const initState = {
     searchStar: false,
-    targetCard: {},
+    targetCard: {
+        title: ''
+    },
     targetCardId: ''
 }
 
@@ -41,6 +43,29 @@ const Home = (state = initState, action) => {
             return {
                 ...state,
                 targetCard: action.payload.note,
+            }
+
+        case Types.CREATE_NOTE_INFO :
+            const targetCardInfo = {
+                ...state.targetCard,
+                title: action.payload.title
+            }
+
+            const targetCardArray = state.note.map((row) => {
+                if(row.id === action.payload.id) {
+                    return {
+                        ...row,
+                        title: action.payload.title
+                    }
+                } else {
+                    return row
+                }
+            })
+            
+            return {
+                ...state,
+                targetCard: targetCardInfo,
+                note: targetCardArray
             }
 
         default:

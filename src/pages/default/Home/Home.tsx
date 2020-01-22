@@ -1,25 +1,39 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {useDispatch} from 'react-redux';
-import { getNoteRequest } from 'config/library/redux/store/Home/action';
+import { useSelector, useDispatch } from 'react-redux';
+import { getNoteRequest, createNoteInfo } from 'config/library/redux/store/Home/action';
 
 import NoteList from 'pages/default/NoteList';
 import Editor from 'resources/components/atoms/Editor';
 
 interface Props {}
 
-interface State {}
+interface State {
+    Home: {
+        targetCardId: number,
+        targetCard: any,
+    }
+}
 
 const Home = (props: Props, state: State) => {
     const dispatch = useDispatch();
 
-    dispatch(getNoteRequest())
-    
+    const TargetNodeId = useSelector((state: State) => state.Home.targetCardId);
+    const TargetNodeTitle = useSelector((state: State) => state.Home.targetCard.title);
+
+    const handleCardTitle = (e: any) => {
+        dispatch(createNoteInfo(TargetNodeId, e.target.value))
+    }
+
+    useEffect(() => {
+        dispatch(getNoteRequest())
+    }, [dispatch]);
+
     return(
         <>
             <NoteList/>
             <EditorRoot>
-                <EditorTitle type="text" placeholder="無標題"/>
+                <EditorTitle type="text" placeholder="無標題" onChange={handleCardTitle} value={TargetNodeTitle}/>
                 <Editor/>
             </EditorRoot>
         </>
