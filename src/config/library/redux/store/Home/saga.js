@@ -41,9 +41,22 @@ function* watchCreateNoteSuccess() {
     yield takeLatest(actions.Types.CREATE_NOTE_SUCCESS, createNote)
 }
 
+function* postNote(action, payload) {
+    try{
+        yield call(api.fixNote, {id: action.payload.beforeCard.id, note: action.payload.beforeCard})
+    }catch (e) {
+
+    }
+}
+
+function* watchPostNote() {
+    yield takeLatest(actions.Types.GET_TARGET_CARD, postNote)
+}
+
 const HomeSagas = [
     fork(watchGetNoteRequest),
-    fork(watchCreateNoteSuccess)
+    fork(watchCreateNoteSuccess),
+    fork(watchPostNote)
 ];
 
 export default HomeSagas;

@@ -2,7 +2,7 @@
   "note": [
     {
       "title": "第一篇",
-      "content": "<span>內容</span>",
+      "content": "<p>內容</p>",
       "time": "2019/9/5",
       "tags": [
         {
@@ -15,11 +15,12 @@
         }
       ],
       "files": true,
+      "text": "內容",
       "id": 1
     },
     {
       "title": "第二篇",
-      "content": "<span>內容</span>",
+      "content": "<p>內容2</p>",
       "time": "2019/9/5",
       "tags": [
         {
@@ -28,6 +29,7 @@
         }
       ],
       "files": false,
+      "text": "內容2",
       "id": 2
     }
   ]

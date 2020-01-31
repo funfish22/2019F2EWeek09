@@ -1,14 +1,26 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { useSelector, useDispatch  } from 'react-redux';
 import BraftEditor, {BraftEditorProps, ExtendControlType} from 'braft-editor';
+import { handleLivinig } from 'config/library/redux/store/Home/action';
 
 import 'braft-editor/dist/index.css';
 import './index.css';
 
 interface Props {
-    className?: string
+    className?: string,
+    onChange: any,
+    Content: string
 }
 
-interface State {}
+interface State {
+    Home: {
+        targetCard: {
+            editorState: any,
+            text: any
+        },
+        isLivinig: boolean
+    }
+}
 
 const { useState } = React;
 
@@ -27,11 +39,37 @@ const editorProps: BraftEditorProps = {
 }
 
 const Editor = (props: Props, state: State) => {
-    const [editorState, createEditor] = useState(BraftEditor.createEditorState(null))
+    const isLivinig = useSelector((state: State) => state.Home.isLivinig)
 
-    const handleChange = (editorState: any) => {
-        console.log(editorState.toHTML())
-        createEditor(editorState)
+    const dispatch = useDispatch();
+
+    const [editorState, createEditor] = useState(BraftEditor.createEditorState(null))
+    const { onChange, Content } = props;
+
+    const handleChange = (editor: any) => {
+        const raw = editor.toRAW(true)
+        const contentHtml = editor.toHTML()
+        let contentText = ''
+        raw.blocks.forEach((row: any) => {
+            contentText += row.text
+        })
+
+        createEditor(editor)
+        onChange(contentText, contentHtml)
+    }
+
+    useEffect(() => {
+        if(isLivinig === true) {
+            setEditorContentAsync()
+        }
+        
+        return () => {
+            dispatch(handleLivinig(false))
+        }
+    });
+
+    const setEditorContentAsync = () => {
+        isLivinig && createEditor(BraftEditor.createEditorState(Content))
     }
 
     const {className} = props;

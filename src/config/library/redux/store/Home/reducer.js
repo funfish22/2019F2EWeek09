@@ -3,9 +3,14 @@ import { Types } from './action'
 const initState = {
     searchStar: false,
     targetCard: {
-        title: ''
+        title: '',
+        text: '',
+        editorState: null,
     },
-    targetCardId: ''
+    targetCardId: '',
+    isLivinig: true,
+    note: [],
+    beforeCard: ''
 }
 
 
@@ -26,17 +31,18 @@ const Home = (state = initState, action) => {
                     time: action.payload.time,
                     tags: [],
                     files: false,
+                    editorState: null,
                     id: action.payload.id
                 }]
             }
 
         case Types.GET_TARGET_CARD :
             const targetCard = state.note.find((row) => row.id === action.payload.id)
-
             return {
                 ...state,
                 targetCardId: action.payload.id,
-                targetCard: targetCard
+                targetCard: targetCard,
+                beforeCard: action.payload.beforeCard
             }
 
         case Types.GET_TARGET_CARD_SUCCESS :
@@ -66,6 +72,37 @@ const Home = (state = initState, action) => {
                 ...state,
                 targetCard: targetCardInfo,
                 note: targetCardArray
+            }
+
+        case Types.CREATE_NOTE_TEXT:
+            const targetCardText = {
+                ...state.targetCard,
+                text: action.payload.text,
+                content: action.payload.html
+            }
+
+            const targetCardTextArray = state.note.map((row) => {
+                if(row.id === action.payload.id) {
+                    return {
+                        ...row,
+                        text: action.payload.text,
+                        content: action.payload.html
+                    }
+                } else {
+                    return row
+                }
+            })
+            
+            return {
+                ...state,
+                targetCard: targetCardText,
+                note: targetCardTextArray
+            }
+
+        case Types.HANDLE_LIVINIG :
+            return {
+                ...state,
+                isLivinig: action.payload.isLivinig
             }
 
         default:

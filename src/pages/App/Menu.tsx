@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useDispatch} from 'react-redux';
-import { createNoteRequest, createNoteSuccess, getTargetCard } from 'config/library/redux/store/Home/action';
+import { createNoteRequest, createNoteSuccess, getTargetCard, handleLivinig } from 'config/library/redux/store/Home/action';
 
 import Logo from 'resources/components/atoms/Logo';
 import AddNoteButton from 'resources/components/atoms/AddNoteButton';
@@ -22,6 +22,7 @@ const Menu = (props: Props, state: State) => {
         dispatch(createNoteRequest({title, time, id}));
         dispatch(createNoteSuccess({title, time, id}));
         dispatch(getTargetCard(id))
+        dispatch(handleLivinig(true))
     }
     
     return(

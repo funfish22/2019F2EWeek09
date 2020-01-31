@@ -7,14 +7,20 @@ export const getNote = () => {
 export const createNote = ({title, time, id}) => {
     return axios.post('/note', {
         title,
-        content: '',
+        content: null,
         time,
         tags: [],
         files: false,
+        text: '',
         id
     })
 };
 
 export const getCreateCard = id => {
     return axios.get(`/note/${id}`)
+}
+
+export const fixNote = ({id, note}) => {
+    if(id === undefined) return
+    return axios.put(`/note/${id}`, note)
 }

@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTargetCard } from 'config/library/redux/store/Home/action';
 
 import Search from 'resources/components/atoms/Search';
 import NoteCard from 'resources/components/atoms/NoteCard';
 
-interface Props {}
+interface Props {
+    onClick: any
+}
 
 interface State {
     Home: { 
@@ -18,27 +19,24 @@ interface State {
                     id: number,
                     tagTitle: string
                 }>,
-            files: boolean
+            files: boolean,
+            text: string
         }>,
         targetCardId: number
     }
 }
 
 const NoteList = (props: Props, state: State) => {
-    const dispatch = useDispatch();
+    const { onClick } = props;
 
     const Note = useSelector((state: State) => state.Home.note);
     const TargetNodeId = useSelector((state: State) => state.Home.targetCardId);
-
-    const targetCard = (id: number) => {
-        dispatch(getTargetCard(id))
-    }
 
     return(
         <NoteListRoot>
             <Search/>
             <Gutter/>
-            <NoteCard Note={Note} NoteId={TargetNodeId} onClick={targetCard}/>
+            <NoteCard Note={Note} NoteId={TargetNodeId} onClick={onClick}/>
         </NoteListRoot>
     )
 }

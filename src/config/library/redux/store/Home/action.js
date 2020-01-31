@@ -8,7 +8,10 @@ export const Types = {
     GET_TARGET_CARD: 'home/get_target_card',
     GET_TARGET_CARD_SUCCESS: 'home/get_target_card_success',
 
-    CREATE_NOTE_INFO: 'home/create_note_info'
+    CREATE_NOTE_INFO: 'home/create_note_info',
+    CREATE_NOTE_TEXT: 'home/create_note_text',
+
+    HANDLE_LIVINIG: 'home/handle_livinig'
 }
 
 export const getNoteRequest = () => ({
@@ -44,10 +47,11 @@ export const createNoteSuccess = ({title, time, id}) => {
     }
 }
 
-export const getTargetCard = id => ({
+export const getTargetCard = (id, beforeCard) => ({
     type: Types.GET_TARGET_CARD,
     payload: {
-        id
+        id,
+        beforeCard
     }
 })
 
@@ -63,5 +67,21 @@ export const createNoteInfo = (id, title) => ({
     payload: {
         id,
         title
+    }
+})
+
+export const createNoteText = (id, text, html) => ({
+    type: Types.CREATE_NOTE_TEXT,
+    payload: {
+        id,
+        text,
+        html
+    }
+})
+
+export const handleLivinig = (isLivinig) => ({
+    type: Types.HANDLE_LIVINIG,
+    payload: {
+        isLivinig
     }
 })
