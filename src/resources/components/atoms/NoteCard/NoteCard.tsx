@@ -27,7 +27,8 @@ interface Props {
             id: number,
             tagTitle: string
         }>,
-        files: boolean
+        files: boolean,
+        text: string
     }>,
     NoteId: number,
     onClick: any
@@ -53,7 +54,7 @@ const NoteCard = (props: Props, state: State) => {
                             <NoteTitleBG isCurrent={isCurrent}/>
                             <NoteTitle>{row.title}</NoteTitle>
                             <NoteGutter/>
-                            <NoteText>{ReactHtmlParser(row.content)}</NoteText>
+                            <NoteText>{row.text}</NoteText>
                             <NoteFooter>
                                 <NoteTagRoot>
                                     {
@@ -174,10 +175,17 @@ const NoteGutter = styled.hr`
 `;
 
 const NoteText = styled.p`
-    height: 103px;
-    max-height: 103px;
+    height: 96px;
+    max-height: 96px;
     position: relative;
     z-index: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    margin-bottom: 7px;
 `;
 
 const NoteFooter = styled.div`

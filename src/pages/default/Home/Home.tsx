@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { getNoteRequest, createNoteInfo } from 'config/library/redux/store/Home/action';
+import { getNoteRequest, createNoteInfo, createNoteText, getTargetCard, handleLivinig } from 'config/library/redux/store/Home/action';
 
 import NoteList from 'pages/default/NoteList';
 import Editor from 'resources/components/atoms/Editor';
@@ -18,11 +18,22 @@ interface State {
 const Home = (props: Props, state: State) => {
     const dispatch = useDispatch();
 
-    const TargetNodeId = useSelector((state: State) => state.Home.targetCardId);
-    const TargetNodeTitle = useSelector((state: State) => state.Home.targetCard.title);
+    const TargetNoteId = useSelector((state: State) => state.Home.targetCardId);
+    const TargetNoteTitle = useSelector((state: State) => state.Home.targetCard.title);
+    const TargetNoteContent = useSelector((state: State) => state.Home.targetCard.content);
+    const TargetNote = useSelector((state: State) => state.Home.targetCard);
 
     const handleCardTitle = (e: any) => {
-        dispatch(createNoteInfo(TargetNodeId, e.target.value))
+        dispatch(createNoteInfo(TargetNoteId, e.target.value))
+    }
+
+    const handleCardText = (text: string, html: string) => {
+        dispatch(createNoteText(TargetNoteId, text, html))
+    }
+
+    const targetCard = (id: number) => {
+        dispatch(getTargetCard(id, TargetNote))
+        dispatch(handleLivinig(true))
     }
 
     useEffect(() => {
@@ -31,10 +42,10 @@ const Home = (props: Props, state: State) => {
 
     return(
         <>
-            <NoteList/>
+            <NoteList onClick={targetCard}/>
             <EditorRoot>
-                <EditorTitle type="text" placeholder="無標題" onChange={handleCardTitle} value={TargetNodeTitle}/>
-                <Editor/>
+                <EditorTitle type="text" placeholder="無標題" onChange={handleCardTitle} value={TargetNoteTitle}/>
+                <Editor onChange={handleCardText} Content={TargetNoteContent}/>
             </EditorRoot>
         </>
     )
