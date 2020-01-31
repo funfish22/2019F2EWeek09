@@ -40,6 +40,9 @@ const MenuRoot = styled.div`
     min-height: 100vh;
     background-color: #2F419B;
     padding: 50px 33px;
+    position: fixed;
+    top: 0;
+    left: 0;
 `;
 
 const LogoRoot = styled(Logo)`

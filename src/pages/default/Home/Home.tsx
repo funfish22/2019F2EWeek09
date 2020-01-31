@@ -55,6 +55,9 @@ export default Home;
 
 const EditorRoot = styled.div`
     padding: 52px 46px;
+    max-height: 100vh;
+    max-width: calc(100% - 613px);
+    margin-left: auto;
 `;
 
 const EditorTitle = styled.input`
