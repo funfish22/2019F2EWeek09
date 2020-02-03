@@ -46,8 +46,8 @@ const NoteList = (props: Props, state: State) => {
 export default NoteList;
 
 const NoteListRoot = styled.div`
-    background-color: #F4F6F7;
-    border-right: 1px solid #E1E1E1;
+    background-color: ${({ theme }) => theme.listRootBG};
+    border-right: 1px solid ${({ theme }) => theme.listGutterColor};
     padding-top: 50px;
     display: flex;
     flex-direction: column;
@@ -64,7 +64,7 @@ const Gutter = styled.hr`
     margin-top: 20px;
     border: none;
     padding: 0;
-    background-color: #D9D9D9;
+    background-color: ${({ theme }) => theme.listGutterColor};
     height: 1px;
 `;
 
@@ -79,6 +79,6 @@ const NoteListBlock = styled.div`
     }
 
     &::-webkit-scrollbar-thumb{
-        background-color: #2F419B;
+        background-color: ${({ theme }) => theme.mainColor};
     }
 `;

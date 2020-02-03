@@ -55,9 +55,25 @@ export default Home;
 
 const EditorRoot = styled.div`
     padding: 52px 46px;
-    max-height: 100vh;
     max-width: calc(100% - 613px);
     margin-left: auto;
+    background-color: ${({ theme }) => theme.editBGColor};
+
+    .bf-container button{
+        color: ${({ theme }) => theme.editButtonColor} !important;
+    }
+
+    .bf-container .control-item{
+        color: ${({ theme }) => theme.editButtonColor} !important;
+    }
+
+    .bf-controlbar {
+        box-shadow: inset 0 -1px 0 0 ${({ theme }) => theme.editGutterColor} !important;
+    }
+
+    .public-DraftEditor-content{
+        color: ${({ theme }) => theme.editColor} !important;
+    }
 `;
 
 const EditorTitle = styled.input`
@@ -68,6 +84,8 @@ const EditorTitle = styled.input`
     outline: none;
     padding: 0 5px;
     margin-bottom: 5px;
+    color: ${({ theme }) => theme.editColor};
+    background-color: ${({ theme }) => theme.editBGColor};
 
     &::-webkit-input-placeholder{
         color: #A3A3A3;

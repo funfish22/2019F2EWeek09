@@ -26,15 +26,16 @@ const AddNoteButtonRoot = styled.button`
     align-items: center;
     padding: 11px 46px 11px 30px;
     cursor: pointer;
-    box-shadow: 0px 0px 6px rgba(255,255,255,.29);
+    box-shadow: 0px 0px 6px ${({ theme }) => theme.buttonHoverColor};
     border-radius: 8px;
     white-space: nowrap;
     background-color: #fff;
     font-family: 'Helvetica Neue', 'Microsoft JhengHei', sans-serif;
     transition: .5s;
+    background-color: ${({ theme }) => theme.buttonBGColor};
 
     &:hover{
-        box-shadow: 0px 0px 15px rgba(255,255,255,.5);
+        box-shadow: 0px 0px 15px ${({ theme }) => theme.buttonHoverColor};
     }
 `;
 
@@ -42,14 +43,14 @@ const AddNoteText = styled.p`
     font-size: 18px;
     line-height: 23px;
     font-weight: bold;
-    color: #2F419B;
+    color: ${({ theme }) => theme.buttonColor};
 `;
 
 const AddIcon = styled.div`
     width: 26px;
     height: 26px;
     border-radius: 50%;
-    background-color: #2F419B;
+    background-color: ${({ theme }) => theme.buttonColor};
     position: relative;
     margin-right: 16px;
 
