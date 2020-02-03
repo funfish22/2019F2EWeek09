@@ -36,7 +36,9 @@ const NoteList = (props: Props, state: State) => {
         <NoteListRoot>
             <Search/>
             <Gutter/>
-            <NoteCard Note={Note} NoteId={TargetNodeId} onClick={onClick}/>
+            <NoteListBlock>
+                <NoteCard Note={Note} NoteId={TargetNodeId} onClick={onClick}/>
+            </NoteListBlock>
         </NoteListRoot>
     )
 }
@@ -44,16 +46,39 @@ const NoteList = (props: Props, state: State) => {
 export default NoteList;
 
 const NoteListRoot = styled.div`
-    background-color: #F4F6F7;
-    border-right: 1px solid #E1E1E1;
-    padding: 50px 33px;
+    background-color: ${({ theme }) => theme.listRootBG};
+    border-right: 1px solid ${({ theme }) => theme.listGutterColor};
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    left: 256px;
+    top: 0;
+    bottom: 0;
 `;
 
 const Gutter = styled.hr`
-    width: calc(100% + 66px);
-    margin: 20px 0 33px -33px;
+    width: 100%;
+    margin: 0;
+    margin-top: 20px;
     border: none;
     padding: 0;
-    background-color: #D9D9D9;
+    background-color: ${({ theme }) => theme.listGutterColor};
     height: 1px;
+`;
+
+const NoteListBlock = styled.div`
+    padding: 20px 33px;
+    height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar{
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb{
+        background-color: ${({ theme }) => theme.mainColor};
+    }
 `;
