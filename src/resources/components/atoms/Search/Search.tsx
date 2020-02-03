@@ -26,13 +26,13 @@ const SearchRoot = styled.div`
     max-width: 100%;
     align-items: center;
     border-radius: 8px;
-    background-color: #E6E6E6;
+    background-color: ${({ theme }) => theme.inputBGColor};
     padding: 12px 20px;
 `;
 
 const Icon = styled.span`
     font-size: 21px;
-    color: #333;
+    color: ${({ theme }) => theme.inputIconColor};
 `;
 
 const Input = styled.input`
@@ -44,6 +44,7 @@ const Input = styled.input`
     margin-left: 12px;
     flex: 1;
     font-weight: bold;
+    color: ${({ theme }) => theme.editColor};
 
     &::-webkit-input-placeholder{
         color: #A3A3A3;

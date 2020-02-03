@@ -87,7 +87,7 @@ export default NoteCard;
 const NoteTitleBG = styled.div`
     position: absolute;
     border-radius: 5px;
-    border: 3px solid #2F419B;
+    border: 3px solid ${({ theme }) => theme.mainColor};
     width: 100%;
     height: 100%;
     top: 0;
@@ -102,7 +102,7 @@ const NoteTitleBG = styled.div`
         height: 0;
         border-style: solid;
         border-width: 0 33px 33px 0;
-        border-color: transparent #F4F6F7 transparent transparent;
+        border-color: transparent ${({ theme }) => theme.listRootBG} transparent transparent;
         top: -4px;
         right: -4px;
     }
@@ -112,7 +112,7 @@ const NoteTitleBG = styled.div`
         position: absolute;
         width: 42px;
         height: 3px;
-        background-color: #2F419B;
+        background-color: ${({ theme }) => theme.mainColor};
         transform: rotate(45deg);
         right: -8px;
         top: 12px;
@@ -124,10 +124,10 @@ const NoteCardRoot = styled.div`
     width: 290px;
     max-width: 100%;
     padding: 35px 23px 23px 23px;
-    background: linear-gradient(to left bottom,transparent 50%,#e9ebf4 0) no-repeat 100% 0/32px 32px,linear-gradient(-135deg,transparent 23px,#fff 0);
+    background: linear-gradient(to left bottom,transparent 50%,${({ theme }) => theme.cardCornerBG} 0) no-repeat 100% 0/33px 33px,linear-gradient(-135deg,transparent 23px,${({ theme }) => theme.cardBG} 0);
     border-radius: 4px;
     position: relative;
-    box-shadow: 0px 0px 6px #F0F0F0;
+    box-shadow: 0px 0px 6px ${({ theme }) => theme.cardBorderBG};
     
     &:hover{
         ${NoteTitleBG} {
@@ -142,7 +142,7 @@ const NoteCardRoot = styled.div`
         height: 0;
         border-style: solid;
         border-width: 0px 47px 47px 0;
-        border-color: transparent #F4F6F7 transparent transparent;
+        border-color: transparent ${({ theme }) => theme.listRootBG} transparent transparent;
         top: -9px;
         right: -9px;
         z-index: 1;
@@ -156,7 +156,7 @@ const NoteCardRoot = styled.div`
 `;
 
 const NoteTitle = styled.h2`
-    color: #555;
+    color: ${({ theme }) => theme.cardTitleColor};
     font-weight: bold;
     font-size: 18px;
     position: relative;
@@ -186,6 +186,7 @@ const NoteText = styled.p`
     -webkit-box-orient: vertical;
     word-break: break-all;
     margin-bottom: 7px;
+    color: ${({ theme }) => theme.cardTextColor};
 `;
 
 const NoteFooter = styled.div`
@@ -202,10 +203,10 @@ const NoteTagRoot = styled.ul`
 `;
 
 const NoteTag = styled.li`
-    color: #2F419B;
+    color: ${({ theme }) => theme.mainColor};
     padding: 3px 16px;
     font-size: 14px;
-    background-color: #E9EBF4;
+    background-color: ${({ theme }) => theme.cardTagsBG};
     border-radius: 4px;
 
     &:not(:first-of-type){
@@ -223,5 +224,5 @@ const NoteIcon = styled.span`
 
 const NoteTime = styled.div`
     font-size: 15px;
-    color: #666666;
+    color: ${({ theme }) => theme.cardTimeColor};
 `;
